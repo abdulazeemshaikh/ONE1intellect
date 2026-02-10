@@ -121,26 +121,25 @@ function App() {
             href="https://calendly.com/l-f/free-consultation"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-white/[0.05] backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.1] text-ink text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300"
+            className="flex items-center px-4 py-1.5 rounded-full bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-black/[0.06] dark:border-white/[0.08] text-ink text-[9px] font-bold uppercase tracking-[0.2em] transition-colors duration-300"
           >
-            <Sparkles className="w-3.5 h-3.5 text-ink/40" />
             <span>Supercharged ✦ AI infrastructure</span>
           </a>
 
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-full bg-transparent hover:bg-black/5 dark:hover:bg-white/10 text-ink/70 hover:text-ink transition-all duration-300"
+            className="p-2.5 rounded-full bg-transparent text-ink/40 hover:text-ink transition-colors duration-300"
             aria-label="Toggle Theme"
           >
             {theme === 'light' ? (
-              <Moon className="w-4 h-4 stroke-[1.5]" />
+              <Moon className="w-3.5 h-3.5 stroke-[1.5]" />
             ) : (
-              <Sun className="w-4 h-4 stroke-[1.5]" />
+              <Sun className="w-3.5 h-3.5 stroke-[1.5]" />
             )}
           </button>
         </div>
 
-        <main className={`flex-1 w-full mx-auto px-6 md:px-8 flex flex-col justify-center pb-6 pt-2 relative z-10 transition-all duration-500 ${selectedArticle ? 'max-w-7xl' : 'max-w-5xl'}`}>
+        <main className={`flex-1 w-full mx-auto px-6 md:px-8 flex flex-col justify-center pb-6 pt-2 relative z-10 transition-all duration-500 ${selectedArticle ? 'max-w-6xl' : 'max-w-5xl'}`}>
 
           <HeroSearch
             onSearchStart={handleSearchStart}

@@ -38,7 +38,7 @@ const Mermaid: React.FC<{ chart: string }> = ({ chart }) => {
     }, [chart]);
 
     if (error) return <div className="p-4 bg-red-500/10 text-red-500 rounded-lg text-xs font-mono">{error}</div>;
-    return <div ref={ref} className="flex justify-center my-8 overflow-x-auto bg-white/50 dark:bg-white/5 rounded-2xl p-8 backdrop-blur-md shadow-inner border border-black/5 dark:border-white/5" />;
+    return <div ref={ref} className="flex justify-center my-6 overflow-x-auto bg-white/50 dark:bg-white/5 rounded-xl p-6 backdrop-blur-md border border-black/5 dark:border-white/5" />;
 };
 
 // Rich Text Renderer
@@ -104,11 +104,11 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
                 </div>
             );
         case 'heading_1':
-            return <h1 id={block.id} className="text-4xl font-bold mt-16 mb-8 text-ink border-b border-black/10 dark:border-white/10 pb-4 tracking-tight scroll-mt-32">{renderRichText(data.rich_text)}</h1>;
+            return <h1 id={block.id} className="text-3xl font-bold mt-12 mb-6 text-ink border-b border-black/10 dark:border-white/10 pb-3 tracking-tight scroll-mt-28">{renderRichText(data.rich_text)}</h1>;
         case 'heading_2':
-            return <h2 id={block.id} className="text-3xl font-bold mt-12 mb-6 text-ink tracking-tight scroll-mt-32">{renderRichText(data.rich_text)}</h2>;
+            return <h2 id={block.id} className="text-2xl font-bold mt-10 mb-4 text-ink tracking-tight scroll-mt-28">{renderRichText(data.rich_text)}</h2>;
         case 'heading_3':
-            return <h3 id={block.id} className="text-2xl font-bold mt-10 mb-4 text-ink tracking-tight scroll-mt-32">{renderRichText(data.rich_text)}</h3>;
+            return <h3 id={block.id} className="text-xl font-bold mt-8 mb-3 text-ink tracking-tight scroll-mt-28">{renderRichText(data.rich_text)}</h3>;
         case 'bulleted_list_item':
             return (
                 <div className="mb-2">
@@ -140,12 +140,12 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
             );
         case 'toggle':
             return (
-                <details className="group mb-6 bg-black/[0.02] dark:bg-white/[0.02] rounded-2xl p-5 border border-black/5 dark:border-white/5 transition-all hover:bg-black/[0.04] dark:hover:bg-white/[0.04]">
-                    <summary className="text-lg font-bold cursor-pointer list-none flex items-center gap-3 select-none">
-                        <ChevronRight className="w-5 h-5 text-subtle group-open:rotate-90 transition-transform" />
+                <details className="group mb-5 bg-black/[0.01] dark:bg-white/[0.01] rounded-xl p-4 border border-black/5 dark:border-white/5 overflow-hidden">
+                    <summary className="text-base font-bold cursor-pointer list-none flex items-center gap-2 select-none">
+                        <ChevronRight className="w-4 h-4 text-subtle/50 group-open:rotate-90 transition-transform" />
                         {renderRichText(data.rich_text)}
                     </summary>
-                    <div className="mt-6 ml-8 border-l-2 border-black/5 dark:border-white/5 pl-6">
+                    <div className="mt-4 ml-6 border-l border-black/5 dark:border-white/5 pl-5">
                         {renderChildren()}
                     </div>
                 </details>
@@ -181,12 +181,12 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
             const imageUrl = getMediaUrl(data);
             if (!imageUrl) return null;
             return (
-                <figure className="my-12 group">
-                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-black/5 dark:border-white/10 bg-black/5 dark:bg-white/5 aspect-auto min-h-[100px]">
+                <figure className="my-10">
+                    <div className="relative rounded-2xl overflow-hidden border border-black/5 dark:border-white/10 bg-black/5 dark:bg-white/5">
                         <img
                             src={imageUrl}
                             alt="Notion Visual Content"
-                            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                            className="w-full h-full object-contain"
                             loading="lazy"
                             onLoad={(e) => (e.currentTarget.parentElement?.classList.remove('bg-black/5', 'animate-pulse'))}
                             onError={(e) => {
@@ -196,7 +196,7 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
                         />
                     </div>
                     {data.caption && data.caption.length > 0 && (
-                        <figcaption className="text-center text-sm text-subtle mt-6 font-medium italic px-10 leading-relaxed opacity-70">
+                        <figcaption className="text-center text-xs text-subtle mt-4 font-medium italic px-6 opacity-60">
                             {renderRichText(data.caption)}
                         </figcaption>
                     )}
@@ -208,15 +208,14 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
             const mediaUrl = getMediaUrl(data);
             if (!mediaUrl) return null;
             return (
-                <a href={mediaUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 bg-black/[0.03] dark:bg-white/[0.03] rounded-2xl my-6 border border-black/5 dark:border-white/10 hover:bg-black/[0.06] dark:hover:bg-white/[0.06] transition-all group">
-                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shadow-sm">
-                        <File className="w-5 h-5 text-blue-500" />
+                <a href={mediaUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-black/[0.02] dark:bg-white/[0.02] rounded-xl my-4 border border-black/5 dark:border-white/10 transition-colors">
+                    <div className="w-8 h-8 rounded-lg bg-paper dark:bg-white/5 flex items-center justify-center border border-black/5 dark:border-white/10">
+                        <File className="w-4 h-4 text-ink/70" />
                     </div>
                     <div className="flex-1 min-w-0">
-                        <div className="text-sm font-bold text-ink truncate">{data.caption?.[0]?.plain_text || "Attached Document"}</div>
-                        <div className="text-[10px] uppercase tracking-widest text-subtle/50 mt-0.5">{type}</div>
+                        <div className="text-[11px] font-bold text-ink truncate uppercase tracking-wider">{data.caption?.[0]?.plain_text || "Document"}</div>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-subtle/30 group-hover:text-ink transition-colors" />
+                    <ExternalLink className="w-3.5 h-3.5 text-subtle/30" />
                 </a>
             );
         case 'quote':
@@ -234,8 +233,8 @@ const NotionBlockRenderer: React.FC<{ block: NotionBlock }> = ({ block }) => {
             const bgColor = data.color?.split('_')[0] || 'blue';
             return (
                 <div className={`flex flex-col gap-6 p-8 rounded-3xl my-10 border transition-all hover:shadow-lg ${bgColor === 'blue' ? 'bg-blue-500/[0.03] border-blue-500/10' :
-                        bgColor === 'red' ? 'bg-red-500/[0.03] border-red-500/10' :
-                            'bg-ink/[0.03] border-ink/10'
+                    bgColor === 'red' ? 'bg-red-500/[0.03] border-red-500/10' :
+                        'bg-ink/[0.03] border-ink/10'
                     }`}>
                     <div className="flex items-start gap-5">
                         <div className="text-3xl pt-1 shrink-0">{data.icon?.emoji || '💡'}</div>
@@ -347,16 +346,15 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
                                     key={heading.id}
                                     onClick={() => scrollToHeading(heading.id)}
                                     className={`
-                                        group w-full text-left flex items-start gap-3 py-2.5 px-4 rounded-xl transition-all duration-300
+                                        w-full text-left flex items-start gap-3 py-2 px-3 rounded-lg transition-colors
                                         ${activeSection === heading.id
-                                            ? 'bg-ink text-paper shadow-lg shadow-ink/10 -translate-y-0.5'
-                                            : 'text-subtle/70 hover:text-ink hover:bg-black/5 dark:hover:bg-white/5'
+                                            ? 'bg-ink text-paper'
+                                            : 'text-subtle/50 hover:text-ink'
                                         }
                                     `}
-                                    style={{ marginLeft: `${(heading.level - 1) * 1.25}rem` }}
+                                    style={{ marginLeft: `${(heading.level - 1) * 1}rem` }}
                                 >
-                                    <ChevronRight className={`w-3.5 h-3.5 mt-1 shrink-0 transition-all ${activeSection === heading.id ? 'opacity-100 rotate-90' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`} />
-                                    <span className="text-sm font-bold leading-tight">{heading.text}</span>
+                                    <span className="text-xs font-bold leading-tight line-clamp-2">{heading.text}</span>
                                 </button>
                             ))
                         ) : (
@@ -366,13 +364,13 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
                         )}
                     </nav>
 
-                    <div className="mt-12 pt-8 border-t border-black/5 dark:border-white/5">
+                    <div className="mt-10 pt-6 border-t border-black/5 dark:border-white/5">
                         <button
                             onClick={onBack}
-                            className="flex items-center gap-3 text-subtle hover:text-ink transition-all group px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
+                            className="flex items-center gap-2 text-subtle/50 hover:text-ink transition-colors px-3 py-2 rounded-lg"
                         >
-                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
-                            <span className="text-sm font-black uppercase tracking-widest">Return to Library</span>
+                            <ArrowLeft className="w-3.5 h-3.5" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Return</span>
                         </button>
                     </div>
                 </div>
@@ -394,33 +392,26 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
                 </div>
 
                 {/* Header */}
-                <header className="mb-20">
+                <header className="mb-14">
                     {coverImageUrl && (
-                        <div className="w-full h-[40vh] md:h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 shadow-2xl relative group border border-black/5 dark:border-white/10">
-                            <img src={coverImageUrl} alt="Cover" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+                        <div className="w-full h-[25vh] md:h-[30vh] rounded-3xl overflow-hidden mb-10 border border-black/5 dark:border-white/10">
+                            <img src={coverImageUrl} alt="Cover" className="w-full h-full object-cover" />
                         </div>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-subtle/50 mb-8">
-                        <span className="flex items-center gap-2.5 bg-ink/5 px-4 py-2 rounded-full text-ink/80">
-                            <Network className="w-4 h-4" />
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-subtle/40 mb-6">
+                        <span className="flex items-center gap-2 bg-black/[0.03] dark:bg-white/[0.03] px-3 py-1.5 rounded-full text-ink/60">
+                            <Network className="w-3 h-3" />
                             {article.category}
                         </span>
-                        {article.createdDate && (
-                            <span className="flex items-center gap-2.5 bg-black/[0.02] dark:bg-white/[0.02] px-4 py-2 rounded-full">
-                                <Calendar className="w-4 h-4" />
-                                {new Date(article.createdDate).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
-                            </span>
-                        )}
                     </div>
 
-                    <div className="flex items-start gap-6 mb-10">
-                        {pageDetails?.icon?.emoji && <span className="text-6xl md:text-7xl drop-shadow-sm shrink-0">{pageDetails.icon.emoji}</span>}
+                    <div className="flex items-start gap-4 mb-8">
+                        {pageDetails?.icon?.emoji && <span className="text-5xl md:text-5xl shrink-0">{pageDetails.icon.emoji}</span>}
                         {pageDetails?.icon?.type !== 'emoji' && pageDetails?.icon && (
-                            <img src={getMediaUrl(pageDetails.icon)} className="w-20 h-20 rounded-2xl object-cover shadow-lg shrink-0" alt="icon" />
+                            <img src={getMediaUrl(pageDetails.icon)} className="w-12 h-12 rounded-xl object-cover shrink-0" alt="icon" />
                         )}
-                        <h1 className="text-5xl md:text-7xl font-sans font-black text-ink leading-[1] tracking-tighter">
+                        <h1 className="text-3xl md:text-5xl font-sans font-black text-ink leading-[1.1] tracking-tighter">
                             {article.title}
                         </h1>
                     </div>
@@ -428,14 +419,11 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
                     <AnimatePresence>
                         {article.summary && article.summary !== "No summary available." && (
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className="p-10 bg-gradient-to-br from-black/[0.03] to-transparent dark:from-white/[0.03] border-l-[6px] border-ink/20 rounded-r-[2rem] text-ink/80 text-2xl font-serif leading-relaxed italic relative overflow-hidden"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="p-8 bg-black/[0.01] dark:bg-white/[0.01] border-l-2 border-ink/10 rounded-r-2xl text-ink/70 text-lg font-serif leading-relaxed italic"
                             >
-                                <div className="relative z-10">{article.summary}</div>
-                                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                                    <List className="w-24 h-24" />
-                                </div>
+                                {article.summary}
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -469,12 +457,9 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
 
                 {/* Attached Properties Section */}
                 {!loading && pageDetails?.properties && (
-                    <div className="mt-32 pt-16 border-t-2 border-black/[0.03] dark:border-white/[0.03]">
-                        <div className="flex items-center gap-3 mb-10 text-ink/30 uppercase tracking-[0.25em] text-[11px] font-black">
-                            <ImageIcon className="w-4 h-4" />
-                            Linked Assets
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="mt-20 pt-10 border-t border-black/5 dark:border-white/5">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-subtle/30 mb-8">Linked Assets</div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {Object.entries(pageDetails.properties).map(([key, prop]: any) => {
                                 if (prop.type === 'files' && prop.files.length > 0) {
                                     return prop.files.map((file: any, idx: number) => (
@@ -483,15 +468,9 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack }) => {
                                             href={getMediaUrl(file)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="group relative overflow-hidden rounded-[2rem] border border-black/5 dark:border-white/10 aspect-video bg-black/5 flex items-center justify-center"
+                                            className="relative overflow-hidden rounded-xl border border-black/5 dark:border-white/10 aspect-video bg-black/5 flex items-center justify-center"
                                         >
-                                            <img src={getMediaUrl(file)} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-6 text-center text-white">
-                                                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-3">
-                                                    <ExternalLink className="w-5 h-5" />
-                                                </div>
-                                                <div className="text-xs font-black uppercase tracking-widest">{file.name || key}</div>
-                                            </div>
+                                            <img src={getMediaUrl(file)} alt="" className="w-full h-full object-cover" />
                                         </a>
                                     ));
                                 }
