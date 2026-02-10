@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
-import { Network, Type, Lightbulb, Footprints, Moon, Sun } from 'lucide-react';
+import { Network, Type, Lightbulb, Footprints, Moon, Sun, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroSearch from './components/HeroSearch';
 import CategoryCard from './components/CategoryCard';
@@ -115,8 +115,19 @@ function App() {
     <HashRouter>
       <div className="min-h-screen flex flex-col font-sans selection:bg-ink selection:text-paper relative overflow-x-hidden transition-colors duration-500">
 
-        {/* Theme Toggle - Top Right */}
-        <div className="absolute top-6 right-6 md:right-12 z-50">
+        {/* Header Controls - Top Right */}
+        <div className="absolute top-6 right-6 md:right-12 z-50 flex items-center gap-3">
+          <a
+            href="https://calendly.com/l-f/free-consultation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink text-paper text-[11px] font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-ink/10 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+            <Sparkles className="w-3.5 h-3.5" />
+            <span className="relative z-10">Supercharged ✦ AI infrastructure</span>
+          </a>
+
           <button
             onClick={toggleTheme}
             className="p-2.5 rounded-full bg-transparent hover:bg-black/5 dark:hover:bg-white/10 text-ink/70 hover:text-ink transition-all duration-300"
