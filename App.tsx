@@ -130,7 +130,7 @@ function App() {
           </button>
         </div>
 
-        <main className="flex-1 w-full max-w-5xl mx-auto px-6 md:px-8 flex flex-col justify-center pb-6 pt-2 relative z-10">
+        <main className={`flex-1 w-full mx-auto px-6 md:px-8 flex flex-col justify-center pb-6 pt-2 relative z-10 transition-all duration-500 ${selectedArticle ? 'max-w-7xl' : 'max-w-5xl'}`}>
 
           <HeroSearch
             onSearchStart={handleSearchStart}

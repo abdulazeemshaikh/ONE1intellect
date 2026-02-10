@@ -3,7 +3,12 @@ export interface NotionPage {
     id: string;
     url: string;
     properties: Record<string, any>;
-    content?: string;
+}
+
+export interface NotionBlock {
+    id: string;
+    type: string;
+    [key: string]: any;
 }
 
 const NOTION_VERSION = "2022-06-28";
@@ -83,12 +88,12 @@ export const getDatabaseStats = async (): Promise<{ count: number }> => {
     }
 };
 
-export const getPageContent = async (pageId: string): Promise<string> => {
+export const getPageBlocks = async (blockId: string): Promise<NotionBlock[]> => {
     const apiKey = import.meta.env.VITE_NOTION_API_KEY;
-    if (!apiKey || apiKey.includes('PLACEHOLDER')) return "";
+    if (!apiKey || apiKey.includes('PLACEHOLDER')) return [];
 
     try {
-        const response = await fetch(`/api/notion/blocks/${pageId}/children?page_size=100`, {
+        const response = await fetch(`/api/notion/blocks/${blockId}/children?page_size=100`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
@@ -96,19 +101,31 @@ export const getPageContent = async (pageId: string): Promise<string> => {
             }
         });
 
-        if (!response.ok) return "";
+        if (!response.ok) return [];
 
         const data = await response.json();
-        return data.results.map((block: any) => {
-            const type = block.type;
-            if (block[type] && block[type].rich_text) {
-                return block[type].rich_text.map((t: any) => t.plain_text).join('');
-            }
-            return "";
-        }).join('\n\n');
+        const blocks = data.results as NotionBlock[];
+
+        // Fetch children for blocks that have them (like toggles, nested lists)
+        // For breadcrumbs/ToC we mainly need top-level headings, but for "full replica" we might need more.
+        // For now, let's keep it to top level to avoid rate limits, but handle main types.
+
+        return blocks;
 
     } catch (e) {
-        console.error("Error fetching page content", e);
-        return "";
+        console.error("Error fetching page blocks", e);
+        return [];
     }
+}
+
+// Old method for compatibility if used elsewhere, but redirected to content extraction
+export const getPageContent = async (pageId: string): Promise<string> => {
+    const blocks = await getPageBlocks(pageId);
+    return blocks.map((block: any) => {
+        const type = block.type;
+        if (block[type] && block[type].rich_text) {
+            return block[type].rich_text.map((t: any) => t.plain_text).join('');
+        }
+        return "";
+    }).join('\n\n');
 }
