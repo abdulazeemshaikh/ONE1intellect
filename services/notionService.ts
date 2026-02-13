@@ -40,7 +40,9 @@ const notionFetch = async (path: string, options: RequestInit = {}) => {
         ...(options.headers as Record<string, string>),
     };
 
-    const response = await fetch(`/api/notion${path}`, {
+    // Use serverless function with path as query param to avoid rewrite issues
+    const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+    const response = await fetch(`/api/notion?path=${cleanPath}`, {
         ...options,
         headers,
     });

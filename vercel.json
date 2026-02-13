@@ -1,11 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/api/notion/(.*)",
-            "destination": "https://api.notion.com/v1/$1"
-        },
-        {
-            "source": "/((?!api/|index.css|favicon|logo).*)",
+            "source": "/((?!api/|index.css|favicon|logo|assets).*)",
             "destination": "/index.html"
         }
     ]
