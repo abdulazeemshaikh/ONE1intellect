@@ -134,27 +134,27 @@ function App() {
 
         {/* Logo - Visible on results and article pages, hidden on main page */}
         <div className={`fixed top-2 xs:top-3 sm:top-4 left-2 xs:left-3 sm:left-4 md:left-8 z-[60] transition-opacity duration-300 ${(!searchResults && !selectedArticle) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <img 
-            src="/logo.png" 
-            alt="one1intellect" 
+          <img
+            src="/logo.png"
+            alt="one1intellect"
             className="h-4 xs:h-5 md:h-6 w-auto cursor-pointer shrink-0 dark:invert"
             onClick={() => window.location.reload()}
           />
         </div>
-        
+
         <div className="fixed top-2 xs:top-3 sm:top-4 right-2 xs:right-3 sm:right-4 md:right-8 z-[60] flex items-center gap-1 xs:gap-2">
           <a
             href="https://calendly.com/l-f/free-consultation"
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden lg:flex items-center px-3 py-1.5 rounded-full bg-ink/[0.04] dark:bg-white/[0.06] hover:bg-ink/[0.08] dark:hover:bg-white/[0.1] text-ink text-[9px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${selectedArticle ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className={`hidden lg:flex items-center px-3 py-1.5 rounded-full text-ink text-[9px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${selectedArticle ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             <span>SUPERCHARGED ✦ AI INFRASTRUCTURE</span>
           </a>
 
           <button
             onClick={toggleTheme}
-            className="p-1.5 xs:p-2 rounded-full bg-ink/[0.04] dark:bg-white/[0.06] hover:bg-ink/[0.08] dark:hover:bg-white/[0.1] text-ink/50 hover:text-ink transition-all duration-300 min-h-[36px] min-w-[36px] xs:min-h-[44px] xs:min-w-[44px] flex items-center justify-center"
+            className="p-1.5 xs:p-2 rounded-full text-ink/50 hover:text-ink transition-all duration-300 min-h-[36px] min-w-[36px] xs:min-h-[44px] xs:min-w-[44px] flex items-center justify-center"
             aria-label="Toggle Theme"
           >
             {theme === 'light' ? (
@@ -176,7 +176,7 @@ function App() {
               className="fixed top-0 left-0 right-0 z-50 px-2 xs:px-3 sm:px-4 md:px-8 py-2 xs:py-3"
             >
               <div className="absolute inset-0 bg-paper/80 dark:bg-paper/90 backdrop-blur-2xl border-b border-black/[0.06] dark:border-white/[0.08]" />
-              
+
               <div className="relative flex items-center justify-center max-w-7xl mx-auto">
                 {/* Search Bar - Centered */}
                 <div className="w-full max-w-xl mx-auto px-8 xs:px-10 sm:px-12 md:px-20">
