@@ -17,6 +17,7 @@ export default {
         extend: {
             colors: {
                 paper: 'var(--color-paper)',
+                surface: 'var(--color-surface)',
                 ink: 'var(--color-ink)',
                 subtle: 'var(--color-subtle)',
                 border: 'var(--color-border)',
